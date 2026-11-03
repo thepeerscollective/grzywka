@@ -1,0 +1,109 @@
+.grey { color: var(--grey); }
+.small { font-size: 13px; color: var(--grey); }
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ---------- a look ---------- */
+.look { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: #fff; }
+.look-photo { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #e7c6d6; }
+.look-photo > img.main { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }
+.look-text { padding: 110px clamp(24px, 4vw, 70px) 70px; }
+.look-name { font-size: clamp(80px, 9.6vw, 150px); margin: 14px 0 22px; }
+.look-line { font-size: 20px; max-width: 36ch; margin: 0 0 18px; }
+.look .meta { display: flex; gap: 8px 18px; flex-wrap: wrap; margin: 0 0 26px; }
+.say { background: var(--baby); border-radius: var(--radius); padding: 18px 22px; margin-bottom: 18px; }
+.say p { margin: 0 0 6px; }
+.say p:last-child { font-size: 19px; margin: 0; }
+.by { margin: 0 0 22px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+.pair figure { margin: 0; }
+.pair img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 18px; padding: 5px; background: var(--chrome); }
+.pair figcaption { margin-top: 10px; color: var(--grey); }
+.more { background: var(--lilac); padding: clamp(44px, 6vw, 80px) var(--gutter); }
+.more h2 { font-size: clamp(50px, 6vw, 90px); margin-bottom: 26px; }
+.more-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.more-card { text-decoration: none; }
+.more-card .ph { display: block; aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden; }
+.more-card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.more-card:hover .ph img { transform: scale(1.04); }
+.more-card .nm { display: block; font: italic 400 34px/1 var(--display); font-variation-settings: 'opsz' 96; margin-top: 12px; }
+@media (max-width: 860px) {
+  .look { grid-template-columns: 1fr; }
+  .look-photo { position: relative; height: auto; aspect-ratio: 4 / 5; }
+  .look-text { padding: 30px var(--gutter) 50px; }
+  .look-text.page-top { padding-top: 30px; }
+  .more-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- prices ---------- */
+.prices { background: var(--baby); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(30px, 5vw, 80px); padding: 110px var(--gutter) 80px; }
+.price-list h1 { font-size: clamp(80px, 10vw, 160px); margin-bottom: 24px; }
+.price-list .intro { max-width: 44ch; margin: 0 0 30px; }
+.pgroup h2 { margin: 30px 0 4px; }
+.pgroup ul { list-style: none; margin: 0; padding: 0; }
+.pgroup li { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 12px 0 10px; border-bottom: 1px solid rgba(20, 16, 20, .25); }
+.pn { font: italic 400 clamp(28px, 2.8vw, 38px)/1.1 var(--display); font-variation-settings: 'opsz' 96; }
+.price-photo .frame { position: sticky; top: 30px; border-radius: 26px; padding: 7px; background: var(--chrome); box-shadow: 0 30px 60px rgba(120, 30, 80, .2); }
+.price-photo .frame img { width: 100%; border-radius: 20px; aspect-ratio: 3 / 4; object-fit: cover; }
+.team { background: var(--purple); color: #fff; padding: clamp(50px, 6vw, 90px) var(--gutter); }
+.team h2 { font-size: clamp(54px, 7vw, 110px); margin-bottom: 34px; }
+.team-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.member .ph { aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden; }
+.member .ph img { width: 100%; height: 100%; object-fit: cover; }
+.member .mrow { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 14px 0 6px; flex-wrap: wrap; }
+.member h3 { font-size: 54px; }
+.member p { margin: 6px 0; }
+.member .cuts { color: #e6d6ff; }
+.member a { color: inherit; }
+@media (max-width: 860px) {
+  .prices { grid-template-columns: 1fr; padding-top: 90px; }
+  .price-photo { order: -1; }
+  .price-photo .frame { position: static; }
+  .price-photo .frame img { aspect-ratio: 4 / 3; }
+  .team-cols { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ---------- book ---------- */
+.book { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(30px, 5vw, 70px); padding: 110px var(--gutter) 80px; align-items: start; }
+.book-form h1 { font-size: clamp(80px, 9vw, 140px); margin-bottom: 30px; }
+.book-form fieldset { border: 0; padding: 0; margin: 0 0 18px; min-width: 0; }
+.book-form legend { padding: 0; margin-bottom: 10px; }
+.picks { display: flex; gap: 10px; overflow-x: auto; padding: 4px 4px 10px; scroll-snap-type: x proximity; }
+.picks label { position: relative; flex: 0 0 104px; cursor: pointer; scroll-snap-align: start; }
+.picks img { width: 104px; height: 130px; object-fit: cover; border-radius: 14px; outline: 0 solid var(--pink); outline-offset: 2px; transition: outline-width .12s; }
+.picks label span { display: block; font: italic 400 18px/1.1 var(--display); font-variation-settings: 'opsz' 96; margin-top: 6px; }
+.picks label.on img { outline-width: 3px; }
+.picks label:has(input:focus-visible) img { outline: 3px solid var(--purple); }
+.f { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.f input, .f select { font: 500 16px var(--body); min-height: 50px; padding: 0 18px; border: 1.5px solid var(--pink); border-radius: 999px; background: #fff; color: var(--ink); appearance: none; }
+.f select { background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e0137f' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 18px center; padding-right: 40px; }
+.f input[aria-invalid='true'] { border-color: #b00040; border-width: 2px; }
+.err { margin: 2px 0 0 14px; color: #b00040; font-size: 14px; }
+.submit { width: 100%; min-height: 54px; margin-top: 8px; }
+.book-card { position: sticky; top: 30px; aspect-ratio: 3 / 4; border-radius: 26px; overflow: hidden; padding: 0; background: #e7c6d6; box-shadow: 0 0 0 6px #fff, 0 0 0 9px #d7d9e0, 0 30px 60px rgba(120, 30, 80, .2); }
+.book-card > img.main { width: 100%; height: 100%; object-fit: cover; animation: fadein .4s ease; }
+@keyframes fadein { from { opacity: .3; } }
+.book-card .see { position: absolute; left: 26px; right: 26px; bottom: 26px; color: #fff; font-size: clamp(40px, 4.4vw, 66px); text-shadow: 0 2px 20px rgba(0,0,0,.4); }
+.book-card.done .see { bottom: 60px; }
+.book-card .conf { position: absolute; left: 26px; right: 26px; bottom: 24px; color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,.5); }
+.book-card .booked-word { width: 58%; left: 8%; top: 8%; animation: land .6s cubic-bezier(.3, 1.6, .5, 1) both, shimmer 3.4s ease-in-out .6s infinite; }
+@keyframes land { from { transform: scale(1.8) rotate(-10deg); opacity: 0; } to { transform: rotate(-4deg); opacity: 1; } }
+.call { display: grid; grid-template-columns: 1fr 1fr; background: var(--pink); color: #fff; }
+.call .ph { position: relative; min-height: 520px; }
+.call .ph img:first-child { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.call .tx { padding: clamp(40px, 6vw, 90px) var(--gutter); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 16px; }
+.call h2 { font-size: clamp(60px, 7vw, 110px); }
+.call .pill.hot { background: #fff; color: var(--pink-deep); box-shadow: 0 6px 0 -2px #ffc0de; font-size: 13px; }
+.call .small { color: #ffe3f0; }
+@media (max-width: 860px) {
+  .book { grid-template-columns: minmax(0, 1fr); padding-top: 90px; }
+  .book-card { position: relative; top: 0; aspect-ratio: 4 / 5; }
+  .call { grid-template-columns: 1fr; }
+  .call .ph { min-height: 0; aspect-ratio: 1; }
+}
+@media (max-width: 420px) { .two { grid-template-columns: 1fr; } }
+
+/* ---------- plain pages ---------- */
+.plain { padding: 120px var(--gutter) 80px; max-width: 820px; }
+.plain h1 { font-size: clamp(64px, 9vw, 120px); margin-bottom: 26px; }
+.plain h2 { margin: 30px 0 8px; }
