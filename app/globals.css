@@ -76,7 +76,7 @@ button { font: inherit; color: inherit; }
 @keyframes glow { 0% { opacity: 0; transform: scale(.96); } 25% { opacity: 1; } 45% { filter: brightness(1.12); } 70% { filter: brightness(.95); } 100% { opacity: 1; transform: scale(1); } }
 
 /* glitter words */
-.glitter { position: absolute; pointer-events: none; z-index: 6; height: auto; filter: drop-shadow(0 3px 0 rgba(0,0,0,.25)) drop-shadow(0 10px 30px rgba(255, 62, 165, .35)); animation: shimmer 3.4s ease-in-out infinite; }
+.glitter { position: absolute; pointer-events: none; z-index: 6; height: auto; filter: drop-shadow(0 3px 0 rgba(0,0,0,.25)) drop-shadow(0 10px 26px rgba(0, 0, 0, .3)); animation: shimmer 3.4s ease-in-out infinite; }
 @keyframes shimmer { 0%, 100% { filter: brightness(1) saturate(1) drop-shadow(0 3px 0 rgba(0,0,0,.25)); } 50% { filter: brightness(1.25) saturate(1.15) drop-shadow(0 3px 0 rgba(0,0,0,.25)) drop-shadow(0 0 18px rgba(255,255,255,.55)); } }
 .twinkle { position: absolute; width: 26px; height: 26px; pointer-events: none; z-index: 7; animation: twinkle 2.2s ease-in-out infinite; }
 @keyframes twinkle { 0%, 100% { transform: scale(.3) rotate(0); opacity: 0; } 50% { transform: scale(1) rotate(45deg); opacity: 1; } }
