@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { img, media } from '@/lib/data';
-import { Glitter, Twinkle } from './chrome';
+import { Twinkle } from './chrome';
 
 const LOOP_FROM = 2.1;
 
@@ -84,7 +84,6 @@ export default function BlowDry() {
             <source src={media('blowdry.mp4')} type="video/mp4" />
           </video>
           <span className="meter" aria-hidden><i ref={bar} /></span>
-          <Glitter word="blow-dry" />
         </div>
         <div>
           <p className="label">★ the 22:00 blow-dry · 120 zł</p>

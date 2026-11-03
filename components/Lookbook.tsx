@@ -93,16 +93,21 @@ export default function Lookbook() {
                 </div>
                 <div className="sp-page">
                   <p className="label folio">lookbook aw26 · p.{pad(4 + k * 2)}</p>
-                  <figure className="sp-detail" style={{ margin: 0 }}>
+                  
+                  <h2 className={`display sp-name ${l.name.length > 10 ? 'long' : ''}`}><Link href={`/looks/${l.slug}/`}>{l.name}</Link></h2>
+                  <div className="sp-body">
+                    <figure className="sp-detail" style={{ margin: 0 }}>
                     <img src={img(l.slug + '-detail')} alt={`close up: ${l.detail}`} loading="lazy" />
                     <figcaption className="label">{l.detail}</figcaption>
                   </figure>
-                  <h2 className={`display sp-name ${l.name.length > 10 ? 'long' : ''}`}><Link href={`/looks/${l.slug}/`}>{l.name}</Link></h2>
+                    <div className="sp-info">
                   <p className="sp-line">{l.line}</p>
                   <p className="label sp-meta"><span>time {l.time}</span><span>from {l.from} zł</span><span>{l.every}</span></p>
                   <div className="sp-cta">
                     <Link className="pill hot" href={`/book/?look=${l.slug}`}>book {l.name}</Link>
                     <Link className="pill chrome" href={`/looks/${l.slug}/`}>front, detail, back →</Link>
+                  </div>
+                    </div>
                   </div>
                 </div>
               </article>

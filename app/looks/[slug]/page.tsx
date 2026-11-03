@@ -27,7 +27,7 @@ export default async function LookPage({ params }: { params: Promise<{ slug: str
       <section className="look">
         <div className="look-photo">
           <img className="main" src={img(l.slug)} alt={`${l.name}, front: ${l.line}`} />
-          <Glitter word={l.word ?? 'diva'} style={{ left: '5%', bottom: '6%', width: 'clamp(200px, 22vw, 320px)' }} />
+          {l.word && <Glitter word={l.word} style={{ left: '5%', bottom: '6%', width: 'clamp(200px, 22vw, 320px)' }} />}
           <Twinkle style={{ right: '10%', top: '16%' }} />
         </div>
         <div className="look-text page-top">

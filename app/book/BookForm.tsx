@@ -132,7 +132,7 @@ export default function BookForm() {
           <Glitter word="call-me" style={{ left: '6%', bottom: '6%', width: '62%' }} />
         </div>
         <div className="tx">
-          <p className="label pink">or the old way</p>
+          <p className="label" style={{ color: "#fff" }}>or the old way</p>
           <h2 className="display">call the salon</h2>
           <p>kasia picks up between cuts. if it rings out, she’s holding scissors. try again in ten.</p>
           <a className="pill hot" href={TEL}>{PHONE}</a>
