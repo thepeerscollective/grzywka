@@ -86,7 +86,6 @@
 .book-card .see { position: absolute; left: 26px; right: 26px; bottom: 26px; color: #fff; font-size: clamp(40px, 4.4vw, 66px); text-shadow: 0 2px 20px rgba(0,0,0,.4); }
 .book-card.done .see { bottom: 60px; }
 .book-card .conf { position: absolute; left: 26px; right: 26px; bottom: 24px; color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,.5); }
-.book-card .booked-word { width: 58%; left: 8%; top: 8%; animation: land .6s cubic-bezier(.3, 1.6, .5, 1) both, shimmer 3.4s ease-in-out .6s infinite; }
 @keyframes land { from { transform: scale(1.8) rotate(-10deg); opacity: 0; } to { transform: rotate(-4deg); opacity: 1; } }
 .call { display: grid; grid-template-columns: 1fr 1fr; background: var(--pink); color: #fff; }
 .call .ph { position: relative; min-height: 520px; }
