@@ -106,10 +106,6 @@ export function Footer() {
   );
 }
 
-export function Glitter({ word, style, className = '' }: { word: string; style?: React.CSSProperties; className?: string }) {
-  return <img src={img('word-' + word)} alt="" className={`glitter ${className}`} style={style} />;
-}
-
 export function Twinkle({ style }: { style?: React.CSSProperties }) {
   return <img src={img('sparkle')} alt="" className="twinkle" style={style} />;
 }

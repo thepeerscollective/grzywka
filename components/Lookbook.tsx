@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { LOOKS, img } from '@/lib/data';
-import { Glitter, Twinkle } from './chrome';
 
 const N = LOOKS.length;
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -88,26 +87,19 @@ export default function Lookbook() {
               <article key={l.slug} className={`spread ${k % 2 ? 'mirror' : ''}`} aria-roledescription="slide" aria-label={`${k + 1} of ${N}: ${l.name}`}>
                 <div className="sp-photo">
                   <img className="main" src={img(l.slug)} alt={`${l.name}: ${l.line}`} loading={k < 2 ? 'eager' : 'lazy'} />
-                  {l.word && <Glitter word={l.word} style={k % 2 ? { right: '6%', bottom: '8%' } : { left: '6%', bottom: '8%' }} />}
-                  {l.word && <Twinkle style={{ left: k % 2 ? '18%' : '72%', top: '14%' }} />}
                 </div>
                 <div className="sp-page">
                   <p className="label folio">lookbook aw26 · p.{pad(4 + k * 2)}</p>
-                  
-                  <h2 className={`display sp-name ${l.name.length > 10 ? 'long' : ''}`}><Link href={`/looks/${l.slug}/`}>{l.name}</Link></h2>
-                  <div className="sp-body">
-                    <figure className="sp-detail" style={{ margin: 0 }}>
+                  <figure className="sp-detail" style={{ margin: 0 }}>
                     <img src={img(l.slug + '-detail')} alt={`close up: ${l.detail}`} loading="lazy" />
                     <figcaption className="label">{l.detail}</figcaption>
                   </figure>
-                    <div className="sp-info">
+                  <h2 className={`display sp-name ${l.name.length > 10 ? 'long' : ''}`}><Link href={`/looks/${l.slug}/`}>{l.name}</Link></h2>
                   <p className="sp-line">{l.line}</p>
                   <p className="label sp-meta"><span>time {l.time}</span><span>from {l.from} zł</span><span>{l.every}</span></p>
                   <div className="sp-cta">
                     <Link className="pill hot" href={`/book/?look=${l.slug}`}>book {l.name}</Link>
                     <Link className="pill chrome" href={`/looks/${l.slug}/`}>front, detail, back →</Link>
-                  </div>
-                    </div>
                   </div>
                 </div>
               </article>

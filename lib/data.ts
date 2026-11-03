@@ -16,15 +16,14 @@ export type Look = {
   from: number;
   say: string;
   detail: string;
-  word?: 'diva' | 'obsessed' | 'iconic' | 'fringe' | 'new-cut';
   by: 'kasia' | 'ola' | 'bartek';
 };
 
 /** mixed on purpose: no two of the same girl in a row, nobody parked at the end */
 export const LOOKS: Look[] = [
-  { slug: 'wolf', name: 'the wolf', line: 'shaggy on top, long at the back, a fringe with opinions. for people who air-dry and lie about it.', time: '75 min', every: 'every 6–8 weeks', from: 240, say: '“the wolf. keep the back long, choppy curtain fringe split in the middle, no thinning scissors.”', detail: 'the fringe, split in the middle', word: 'diva', by: 'bartek' },
-  { slug: 'halo', name: 'the halo', line: 'a big round afro, picked out soft. shaped, never cut short. the fringe coils get their own appointment.', time: '90 min', every: 'every 8–10 weeks', from: 220, say: '“the halo. shape it round, keep my length, define the coils at the front, no heat.”', detail: 'the coils at the edge', word: 'obsessed', by: 'kasia' },
-  { slug: 'curtain', name: 'the curtain', line: 'the 2003 one. it’s back. a long fringe from the middle and big flipped-out ends.', time: '75 min', every: 'every 6–8 weeks', from: 220, say: '“curtain fringe from the middle to my cheekbones, long layers, blow-dry the ends out big.”', detail: 'the curtain and one big curl', word: 'iconic', by: 'kasia' },
+  { slug: 'wolf', name: 'the wolf', line: 'shaggy on top, long at the back, a fringe with opinions. for people who air-dry and lie about it.', time: '75 min', every: 'every 6–8 weeks', from: 240, say: '“the wolf. keep the back long, choppy curtain fringe split in the middle, no thinning scissors.”', detail: 'the fringe, split in the middle', by: 'bartek' },
+  { slug: 'halo', name: 'the halo', line: 'a big round afro, picked out soft. shaped, never cut short. the fringe coils get their own appointment.', time: '90 min', every: 'every 8–10 weeks', from: 220, say: '“the halo. shape it round, keep my length, define the coils at the front, no heat.”', detail: 'the coils at the edge', by: 'kasia' },
+  { slug: 'curtain', name: 'the curtain', line: 'the 2003 one. it’s back. a long fringe from the middle and big flipped-out ends.', time: '75 min', every: 'every 6–8 weeks', from: 220, say: '“curtain fringe from the middle to my cheekbones, long layers, blow-dry the ends out big.”', detail: 'the curtain and one big curl', by: 'kasia' },
   { slug: 'butterfly', name: 'the butterfly', line: 'short layers round the face, all the length underneath. looks done when it isn’t.', time: '90 min', every: 'every 8 weeks', from: 260, say: '“butterfly layers starting at my chin, keep the length, flip the ends out.”', detail: 'the face-framing layers', by: 'bartek' },
   { slug: 'bixie', name: 'the bixie', line: 'half bob, half pixie. glossy, soft at the nape, and it grows out kind.', time: '60 min', every: 'every 5–6 weeks', from: 200, say: '“bixie, short at the nape, wispy side fringe, keep the honey ends.”', detail: 'the side fringe and the ends', by: 'kasia' },
   { slug: 'micro', name: 'the micro', line: 'very short, very high, very on purpose. a fringe for people who mean it.', time: '45 min', every: 'fringe trim every 3 weeks', from: 180, say: '“micro fringe two fingers above my brows, slightly uneven, sleek chin bob.”', detail: 'the micro fringe', by: 'kasia' },

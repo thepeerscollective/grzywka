@@ -77,12 +77,13 @@
 .spread.mirror .sp-photo { order: 2; border-radius: 0 4px 4px 0; }
 .spread.mirror .sp-page { order: 1; border-radius: 4px 0 0 4px; box-shadow: inset -18px 0 30px -24px rgba(80, 30, 60, .35); }
 .sp-page .folio { position: absolute; top: clamp(24px, 3vw, 40px); left: clamp(24px, 3vw, 46px); color: var(--grey); }
-.sp-body { display: flex; gap: clamp(18px, 2vw, 30px); align-items: flex-end; }
-.sp-detail { flex: 0 0 clamp(130px, 13vw, 210px); aspect-ratio: 4 / 5; border-radius: 16px; padding: 5px; background: var(--chrome); box-shadow: 0 10px 30px rgba(60, 20, 50, .2); transform: rotate(-2deg); position: relative; }
-.spread.mirror .sp-detail { transform: rotate(2deg); }
+.sp-detail { position: absolute; z-index: 0; top: clamp(20px, 2.4vw, 40px); right: clamp(24px, 3vw, 46px); width: clamp(120px, min(16vw, 24vh), 250px); aspect-ratio: 4 / 5; border-radius: 16px; padding: 5px; background: var(--chrome); box-shadow: 0 10px 30px rgba(60, 20, 50, .2); transform: rotate(2deg); margin: 0; }
+.spread.mirror .sp-detail { transform: rotate(-2deg); }
 .sp-detail img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-.sp-detail .label { position: absolute; left: 0; right: 0; bottom: -24px; text-align: center; color: var(--grey); font-size: 9px; }
-.sp-info { min-width: 0; padding-bottom: 6px; }
+.sp-detail .label { display: none; }
+.sp-page > :not(.sp-detail) { position: relative; z-index: 1; }
+.sp-page > .folio { position: absolute; }
+.sp-name { text-shadow: 0 0 2px #fff, 0 0 10px #fff, 0 0 22px rgba(255,255,255,.9); }
 .sp-name { font-size: clamp(70px, 8.4vw, 132px); margin: 0 0 26px; }
 .sp-name a { text-decoration: none; }
 .sp-name.long { font-size: clamp(60px, 6.4vw, 104px); }
@@ -101,10 +102,8 @@
   .spread { scroll-snap-align: start; grid-template-columns: 1fr; padding: 0 var(--gutter) 22px; }
   .sp-photo { aspect-ratio: 4 / 5; border-radius: 4px 4px 0 0; }
   .spread.mirror .sp-photo { order: 0; border-radius: 4px 4px 0 0; }
-  .sp-page, .spread.mirror .sp-page { order: 1; border-radius: 0 0 4px 4px; padding: 56px 22px 26px; box-shadow: none; }
-  .sp-body { flex-direction: column; align-items: flex-start; }
-  .sp-detail { flex: none; width: 150px; }
-  .sp-detail .label { display: none; }
+  .sp-page, .spread.mirror .sp-page { order: 1; border-radius: 0 0 4px 4px; padding: 40px 22px 26px; box-shadow: none; }
+  .sp-detail { width: 120px; top: -100px; right: 16px; }
   .sp-name.long { font-size: clamp(50px, 13vw, 72px); }
   .sp-name { font-size: clamp(56px, 15vw, 84px); }
   .spread .glitter { width: 52vw; }

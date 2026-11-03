@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { img } from '@/lib/data';
-import { Glitter, Twinkle } from './chrome';
+import { Twinkle } from './chrome';
 
 type P = { x: number; y: number };
 type Strand = { x: number; y: number; r: number; d: number; dx: number; len: number; c: number };
@@ -195,7 +195,6 @@ export default function Cover() {
           </div>
         )}
 
-        {!piece ? <Glitter word="iconic" className="cover-word" /> : <Glitter word="new-cut" className={`cover-word landed ${falling ? 'in' : ''}`} />}
         <Twinkle style={{ left: '12%', top: '62%' }} />
         <Twinkle style={{ left: '84%', top: '58%', animationDelay: '.7s' }} />
         <Twinkle style={{ left: '34%', top: '80%', animationDelay: '1.3s', width: 18, height: 18 }} />

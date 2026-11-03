@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Glitter, Twinkle } from '@/components/chrome';
+import { Twinkle } from '@/components/chrome';
 import { LOOKS, TEAM, img } from '@/lib/data';
 import '../../pages.css';
 
@@ -27,7 +27,6 @@ export default async function LookPage({ params }: { params: Promise<{ slug: str
       <section className="look">
         <div className="look-photo">
           <img className="main" src={img(l.slug)} alt={`${l.name}, front: ${l.line}`} />
-          {l.word && <Glitter word={l.word} style={{ left: '5%', bottom: '6%', width: 'clamp(200px, 22vw, 320px)' }} />}
           <Twinkle style={{ right: '10%', top: '16%' }} />
         </div>
         <div className="look-text page-top">

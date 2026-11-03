@@ -3,7 +3,7 @@ import Cover from '@/components/Cover';
 import Lookbook from '@/components/Lookbook';
 import BlowDry from '@/components/BlowDry';
 import AllLooks from '@/components/AllLooks';
-import { Glitter, Twinkle } from '@/components/chrome';
+import { Twinkle } from '@/components/chrome';
 import { ADDRESS, HOURS, PHONE, TEAM, TEL, img } from '@/lib/data';
 import './home.css';
 
@@ -29,7 +29,6 @@ export default function Home() {
       <section className="findus" aria-labelledby="find-t">
         <div className="ph">
           <img className="main" src={img('shopfront')} alt="the salon at night, a pink neon grzywka sign in the window and a girl on a flip phone outside" loading="lazy" />
-          <Glitter word="call-me" />
           <Twinkle style={{ right: '14%', top: '20%' }} />
         </div>
         <div className="tx">

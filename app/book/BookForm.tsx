@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import { Glitter, Twinkle } from '@/components/chrome';
+import { Twinkle } from '@/components/chrome';
 import { LOOKS, PHONE, TEAM, TEL, img } from '@/lib/data';
 
 type Opt = { slug: string; name: string; short: string; time: string; from: string; pic: string };
@@ -118,7 +118,6 @@ export default function BookForm() {
         <div id="book-card" className={`book-card ${done ? 'done' : ''}`} aria-live="polite">
           <img className="main" key={sel.pic} src={img(sel.pic === sel.slug ? sel.slug : sel.pic)} alt={`${sel.name}, the photo you picked`} />
           <Twinkle style={{ right: '7%', top: '5%' }} />
-          {done && <Glitter word="book-it" className="booked-word" />}
           <p className="display see">
             {done ? <>see you {dd?.long}, {sel.short}.</> : <>{sel.name}.</>}
           </p>
@@ -129,7 +128,6 @@ export default function BookForm() {
       <section id="call" className="call">
         <div className="ph">
           <img src={img('phone-girl')} alt="a girl holding a rhinestone flip phone right up to the camera" loading="lazy" />
-          <Glitter word="call-me" style={{ left: '6%', bottom: '6%', width: '62%' }} />
         </div>
         <div className="tx">
           <p className="label" style={{ color: "#fff" }}>or the old way</p>
