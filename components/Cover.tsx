@@ -11,16 +11,16 @@ type Strand = { x: number; y: number; r: number; d: number; dx: number; len: num
  * cut = where the "after" fringe ends (the brows). ends = the long ends that get cut off.
  */
 const FRINGE = {
-  d: { w: 1672, h: 941, pos: [60, 30], x0: 50.3, x1: 66.2, top: 17, cut: 27.5,
-    ends: [[50.3, 33], [52.5, 35.5], [55, 37], [57.5, 38], [60, 37.6], [62.5, 36.2], [64.5, 34], [66.2, 31]] },
-  m: { w: 941, h: 1672, pos: [50, 30], x0: 27, x1: 66, top: 37, cut: 45,
-    ends: [[27, 47.5], [31, 50], [36, 51.5], [42, 52.2], [48, 52], [54, 51], [60, 49], [66, 46]] },
+  d: { w: 1672, h: 941, pos: [60, 30], x0: 62, x1: 76.9, top: 15.9, cut: 26.6,
+    ends: [[62, 31.9], [65, 35.1], [67.9, 37.2], [70.9, 39.3], [73.9, 37.2], [75.7, 35.1], [76.9, 31.9]] },
+  m: { w: 941, h: 1672, pos: [62, 30], x0: 58.4, x1: 85, top: 40.1, cut: 46.1,
+    ends: [[58.4, 49], [63.8, 50.8], [69.1, 52.3], [74.4, 53.2], [79.7, 52], [82.9, 50.8], [85, 49]] },
 };
 
-/** where the light catches: phone, lips, necklace, clip (photo %) */
+/** where the light catches: earring, necklace (photo %) */
 const SHINE = {
-  d: [[51.97, 36.7, 26], [61.5, 45.8, 18], [62.3, 78.4, 30], [73.6, 21.3, 24], [54.3, 60, 16]],
-  m: [[26.7, 49.8, 22], [50.9, 58.6, 16]],
+  d: [[76.9, 46.8, 22], [68.9, 76.3, 26], [70.5, 8, 18]],
+  m: [[82.4, 57.4, 20], [70, 66, 16]],
 };
 
 export default function Cover() {
@@ -28,6 +28,8 @@ export default function Cover() {
   const [pts, setPts] = useState<P[]>([]);
   const [drawing, setDrawing] = useState(false);
   const [piece, setPiece] = useState<string | null>(null);
+  const [fixed, setFixed] = useState(false);
+  const [brave, setBrave] = useState(false);
   const [falling, setFalling] = useState(false);
   const [strands, setStrands] = useState<Strand[]>([]);
   const [cur, setCur] = useState<P | null>(null);
@@ -114,12 +116,13 @@ export default function Cover() {
     else { setPts([]); setNudge(true); setTimeout(() => setNudge(false), 2600); }
   };
   const auto = () => geo && doCut([{ x: geo.x0, y: geo.cut }, { x: geo.x1, y: geo.cut }]);
-  const reset = () => { setPiece(null); setFalling(false); setPts([]); setStrands([]); };
+  const reset = () => { setPiece(null); setFixed(false); setBrave(false); setFalling(false); setPts([]); setStrands([]); };
+  const fix = () => setFixed(true);
 
   const d = pts.map((p, i) => `${i ? 'L' : 'M'}${p.x} ${p.y}`).join(' ');
 
   return (
-    <section className={`cover ${fine && !piece ? 'scissor-cursor' : ''}`} aria-labelledby="cover-title">
+    <section className={`cover ${fine && !piece ? 'scissor-cursor' : ''} ${fixed ? 'is-fixed' : ''} ${piece && !fixed ? 'is-oops' : ''}`} aria-labelledby="cover-title">
       <div
         ref={box}
         className="cover-stage"
@@ -129,21 +132,30 @@ export default function Cover() {
         onPointerCancel={() => { setDrawing(false); setPts([]); }}
         onPointerLeave={() => { setCur(null); if (drawing) up(); }}
       >
-        <picture className="layer after">
+        <picture className="layer">
           <source media="(max-width: 760px)" srcSet={img('cover-after-m')} />
-          <img src={img('cover-after')} alt="a girl laughing on a rhinestone flip phone against a hot pink wall, her fringe freshly cut to just above the brows" />
+          <img src={img('cover-after')} alt={fixed ? 'the same girl, laughing, with a soft fringe cut perfectly at her brows' : ''} />
+        </picture>
+        <picture className={`layer oops ${fixed ? 'swap' : ''}`} aria-hidden={fixed}>
+          <source media="(max-width: 760px)" srcSet={img('cover-oops-m')} />
+          <img src={img('cover-oops')} alt={piece && !fixed ? 'the same girl, horrified, holding kitchen scissors, her fringe chopped crooked and far too short' : ''} />
         </picture>
         <picture className={`layer before ${piece ? 'swap' : ''}`} aria-hidden={!!piece}>
           <source media="(max-width: 760px)" srcSet={img('cover-before-m')} />
-          <img src={img('cover-before')} alt="" />
+          <img src={img('cover-before')} alt="a girl smiling against a hot pink wall, her long fringe grown out over her eyes" />
         </picture>
+
         {/* the masthead sits behind her, like a real cover */}
         <h1 id="cover-title" className="masthead" aria-label="grzywka, hair salon">grzywka</h1>
-        <picture className="layer cut" aria-hidden>
+        <picture className={`layer cut state ${fixed ? 'on' : ''}`} aria-hidden>
           <source media="(max-width: 760px)" srcSet={img('cover-after-m-cut')} />
           <img src={img('cover-after-cut')} alt="" />
         </picture>
-        <picture className={`layer cut before ${piece ? 'swap' : ''}`} aria-hidden>
+        <picture className={`layer cut state ${piece && !fixed ? 'on' : ''}`} aria-hidden>
+          <source media="(max-width: 760px)" srcSet={img('cover-oops-m-cut')} />
+          <img src={img('cover-oops-cut')} alt="" />
+        </picture>
+        <picture className={`layer cut state ${!piece ? 'on' : ''}`} aria-hidden>
           <source media="(max-width: 760px)" srcSet={img('cover-before-m-cut')} />
           <img src={img('cover-before-cut')} alt="" />
         </picture>
@@ -203,14 +215,24 @@ export default function Cover() {
             <a className="display feature" href="#lookbook">the wolf{' '}<br />is back</a>
             <p className="bar white">gloss, clips &amp; 2003 bangs</p>
           </div>
-        ) : (
+        ) : !fixed ? (
           <div className={`lines after-card ${falling ? 'in' : ''}`} role="status">
+            <p className="bar">oh no.</p>
+            <p className="label kicker">{brave ? 'brave. it grows back 1 cm a month.' : 'the fringe · cut at home, at 2am'}</p>
+            <p className="display feature">{brave ? <>or we fix it{' '}<br />in 15 minutes</> : <>maybe let us{' '}<br />do it?</>}</p>
+            <div className="row">
+              <button className="pill hot" onClick={fix}>{brave ? 'ok fine, fix it' : 'yes please'}</button>
+              {!brave && <button className="pill chrome" onClick={() => setBrave(true)}>i&apos;ll live with it</button>}
+            </div>
+          </div>
+        ) : (
+          <div className="lines after-card in fixed" role="status">
             <p className="bar">much better.</p>
-            <p className="label kicker">the fringe · trimmed to the brows</p>
-            <p className="display feature">free trims{' '}<br />between cuts</p>
+            <p className="label kicker">the fringe · cut at grzywka</p>
+            <p className="display feature">fringe trims{' '}<br />are free, forever</p>
             <div className="row">
               <Link className="pill hot" href="/book/?look=fringe">book a fringe trim</Link>
-              <button className="pill chrome" onClick={reset}>grow it back</button>
+              <button className="pill chrome" onClick={reset}>start over</button>
             </div>
           </div>
         )}
