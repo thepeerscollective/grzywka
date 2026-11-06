@@ -74,6 +74,7 @@
 .cover .more:hover { color: var(--blue); }
 .cta-row { position: absolute; left: var(--gutter); bottom: 54px; display: flex; align-items: center; gap: 24px; }
 .cta-row .addr { color: #fff; }
+.cover.is-cut .cta-row { display: none; }
 .barcode { position: absolute; right: 40px; bottom: 48px; width: 150px; height: 92px; background: #fff; color: var(--ink); display: flex; flex-direction: column; justify-content: space-between; padding: 6px 12px 10px; }
 .barcode .bc { font: 400 52px/.8 'Libre Barcode 39', monospace; text-align: center; overflow: hidden; }
 .barcode span:last-child { font: 700 10px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; }
@@ -111,6 +112,7 @@
   .after-card .row { margin-top: 12px; }
   .after-card .feature { display: none; }
   .cta-row { left: var(--gutter); right: var(--gutter); bottom: 26px; }
+  .cover.is-cut .lines { bottom: 34px; }
   .cta-row .pill { width: 100%; }
 }
 

@@ -69,7 +69,7 @@ export default function BlowDry() {
   return (
     <section
       ref={sec}
-      className="blowdry"
+      className="blowdry on-pink"
       aria-labelledby="bd-title"
       onPointerDown={start}
       onPointerUp={stop}

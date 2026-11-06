@@ -122,7 +122,7 @@ export default function Cover() {
   const d = pts.map((p, i) => `${i ? 'L' : 'M'}${p.x} ${p.y}`).join(' ');
 
   return (
-    <section className={`cover ${fine && !piece ? 'scissor-cursor' : ''} ${fixed ? 'is-fixed' : ''} ${piece && !fixed ? 'is-oops' : ''}`} aria-labelledby="cover-title">
+    <section className={`cover on-pink ${fine && !piece ? 'scissor-cursor' : ''} ${fixed ? 'is-fixed' : ''} ${piece && !fixed ? 'is-oops' : ''} ${piece ? 'is-cut' : ''}`} aria-labelledby="cover-title">
       <div
         ref={box}
         className="cover-stage"
