@@ -29,6 +29,7 @@ export default function Prices() {
           <div className="frame">
             <img src={img('prices')} alt="a girl lying on white sheets in a rhinestone gel face mask, long pink nails over one eye" />
             <Twinkle style={{ right: '8%', top: '6%' }} />
+            <span className="star-burst" aria-hidden><span><small>always</small>free<br />fringe<br />trims</span></span>
           </div>
         </div>
       </section>

@@ -3,6 +3,9 @@ import '@fontsource/michroma/400.css';
 import '@fontsource-variable/bodoni-moda/opsz-italic.css';
 import '@fontsource/schibsted-grotesk/500.css';
 import '@fontsource/schibsted-grotesk/700.css';
+import '@fontsource/unbounded/700.css';
+import '@fontsource/unbounded/900.css';
+import '@fontsource/libre-barcode-39/400.css';
 import './globals.css';
 import { FlipPhone, Footer, Header, Loader, SparkleTrail } from '@/components/chrome';
 import { BASE } from '@/lib/data';
@@ -14,7 +17,7 @@ export const metadata: Metadata = {
   icons: { icon: `${BASE}/favicon.svg` },
   openGraph: { title: 'grzywka · hair salon, warszawa', description: 'the lookbook. cut the fringe yourself.', images: [`${BASE}/og.jpg`] },
 };
-export const viewport: Viewport = { themeColor: '#ff3ea5', width: 'device-width', initialScale: 1 };
+export const viewport: Viewport = { themeColor: '#de2a59', width: 'device-width', initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

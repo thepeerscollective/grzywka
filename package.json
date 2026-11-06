@@ -9,8 +9,10 @@
   "dependencies": {
     "@fontsource-variable/bodoni-moda": "^5.3.0",
     "@fontsource/bodoni-moda": "^5.2.0",
+    "@fontsource/libre-barcode-39": "^5.3.0",
     "@fontsource/michroma": "^5.2.0",
     "@fontsource/schibsted-grotesk": "^5.2.0",
+    "@fontsource/unbounded": "^5.3.0",
     "next": "15.5.28",
     "react": "19.1.0",
     "react-dom": "19.1.0"

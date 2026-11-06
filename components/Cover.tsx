@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { img } from '@/lib/data';
-import { Twinkle } from './chrome';
 
 type P = { x: number; y: number };
 type Strand = { x: number; y: number; r: number; d: number; dx: number; len: number; c: number };
@@ -18,6 +17,12 @@ const FRINGE = {
     ends: [[27, 47.5], [31, 50], [36, 51.5], [42, 52.2], [48, 52], [54, 51], [60, 49], [66, 46]] },
 };
 
+/** where the light catches: phone, lips, necklace, clip (photo %) */
+const SHINE = {
+  d: [[51.97, 36.7, 26], [61.5, 45.8, 18], [62.3, 78.4, 30], [73.6, 21.3, 24], [54.3, 60, 16]],
+  m: [[26.7, 49.8, 22], [50.9, 58.6, 16]],
+};
+
 export default function Cover() {
   const box = useRef<HTMLDivElement>(null);
   const [pts, setPts] = useState<P[]>([]);
@@ -29,7 +34,7 @@ export default function Cover() {
   const [fine, setFine] = useState(false);
   const [reduce, setReduce] = useState(false);
   const [nudge, setNudge] = useState(false);
-  const [geo, setGeo] = useState<null | { x0: number; x1: number; top: number; cut: number; ends: P[] }>(null);
+  const [geo, setGeo] = useState<null | { x0: number; x1: number; top: number; cut: number; ends: P[]; shine: { x: number; y: number; s: number }[] }>(null);
 
   useEffect(() => {
     setFine(window.matchMedia('(pointer: fine)').matches);
@@ -41,13 +46,14 @@ export default function Cover() {
     const calc = () => {
       const el = box.current; if (!el) return;
       const W = el.clientWidth, H = el.clientHeight;
-      const f = window.matchMedia('(max-width: 760px)').matches ? FRINGE.m : FRINGE.d;
+      const mob = window.matchMedia('(max-width: 760px)').matches;
+      const f = mob ? FRINGE.m : FRINGE.d;
       const s = Math.max(W / f.w, H / f.h);
       const rw = f.w * s, rh = f.h * s;
       const ox = (W - rw) * (f.pos[0] / 100), oy = (H - rh) * (f.pos[1] / 100);
       const X = (x: number) => ((ox + (x / 100) * rw) / W) * 100;
       const Y = (y: number) => ((oy + (y / 100) * rh) / H) * 100;
-      setGeo({ x0: X(f.x0), x1: X(f.x1), top: Y(f.top), cut: Y(f.cut), ends: f.ends.map(([x, y]) => ({ x: X(x), y: Y(y) })) });
+      setGeo({ x0: X(f.x0), x1: X(f.x1), top: Y(f.top), cut: Y(f.cut), ends: f.ends.map(([x, y]) => ({ x: X(x), y: Y(y) })), shine: (mob ? SHINE.m : SHINE.d).map(([x, y, sz]) => ({ x: X(x), y: Y(y), s: sz })) });
     };
     calc();
     window.addEventListener('resize', calc);
@@ -131,6 +137,16 @@ export default function Cover() {
           <source media="(max-width: 760px)" srcSet={img('cover-before-m')} />
           <img src={img('cover-before')} alt="" />
         </picture>
+        {/* the masthead sits behind her, like a real cover */}
+        <h1 id="cover-title" className="masthead" aria-label="grzywka, hair salon">grzywka</h1>
+        <picture className="layer cut" aria-hidden>
+          <source media="(max-width: 760px)" srcSet={img('cover-after-m-cut')} />
+          <img src={img('cover-after-cut')} alt="" />
+        </picture>
+        <picture className={`layer cut before ${piece ? 'swap' : ''}`} aria-hidden>
+          <source media="(max-width: 760px)" srcSet={img('cover-before-m-cut')} />
+          <img src={img('cover-before-cut')} alt="" />
+        </picture>
         {piece && (
           <picture className={`layer piece ${falling ? 'fall' : ''}`} style={{ clipPath: piece, transformOrigin: `${geo ? (geo.x0 + geo.x1) / 2 : 50}% ${geo?.cut ?? 30}%` }} aria-hidden>
             <source media="(max-width: 760px)" srcSet={img('cover-before-m')} />
@@ -146,12 +162,18 @@ export default function Cover() {
           </svg>
         )}
 
-        {/* where to cut: a dashed guide right at her brows */}
+        {/* where to cut: a row of rhinestones right at her brows */}
         {!piece && geo && !drawing && (
-          <svg className="guide" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
-            <path d={`M${geo.x0} ${geo.cut} L${geo.x1} ${geo.cut}`} />
-          </svg>
+          <>
+            <span className="stones" style={{ left: `${geo.x0}%`, top: `${geo.cut}%`, width: `${geo.x1 - geo.x0}%` }} aria-hidden />
+            <span className="cut-pill" style={{ left: `calc(${geo.x1}% + 10px)`, top: `${geo.cut}%` }} aria-hidden>✦ cut here</span>
+          </>
         )}
+        {geo?.shine.map((p, k) => (
+          <svg key={k} className="shine" viewBox="0 0 20 20" style={{ left: `${p.x}%`, top: `${p.y}%`, width: p.s, height: p.s, animationDelay: `${k * .55}s` }} aria-hidden>
+            <path d="M10 0 C10.8 7 13 9.2 20 10 C13 10.8 10.8 13 10 20 C9.2 13 7 10.8 0 10 C7 9.2 9.2 7 10 0 Z" />
+          </svg>
+        ))}
         {!piece && pts.length > 1 && (
           <svg className="cutline" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
             <path d={d} />
@@ -168,26 +190,24 @@ export default function Cover() {
       </div>
 
       <div className="cover-ui">
-        <div className="mark">
-          <div className="ringwrap">
-            <h1 id="cover-title" className="wordmark chrome-text">grzywka</h1>
-            <span className="ring" aria-hidden />
-          </div>
-          <p className="label coverline">lookbook · aw26 · 10 looks · warszawa</p>
-        </div>
+        <p className="label issue">aw26 · the fringe issue · 49 zł</p>
 
         {!piece ? (
-          <div className="hint">
-            <p className="label" role="status">
-              {nudge ? 'almost. go across her fringe, along the dotted line' : <><span aria-hidden>✂ </span>{fine ? 'drag the scissors across her fringe' : 'swipe across her fringe'}</>}
+          <div className="lines">
+            <p className="bar">cut it yourself</p>
+            <p className="howto" role="status">
+              {nudge ? 'almost. go across her fringe, along the rhinestones.' : fine ? 'drag the scissors along the rhinestones on her fringe' : 'swipe along the rhinestones on her fringe'}
+              {' '}<button className="textbtn" onClick={auto}>or cut it for me</button>
             </p>
-            <button className="pill chrome" onClick={auto}>or cut it for me</button>
+            <p className="label kicker">p.04 · 10 cuts for now</p>
+            <a className="display feature" href="#lookbook">the wolf{' '}<br />is back</a>
+            <p className="bar white">gloss, clips &amp; 2003 bangs</p>
           </div>
         ) : (
-          <div className={`after-card ${falling ? 'in' : ''}`} role="status">
-            <p className="label pink">the fringe · trimmed to the brows</p>
-            <p className="display">much better.</p>
-            <p>fringe trims between cuts are free, always. walk in, or book ten minutes.</p>
+          <div className={`lines after-card ${falling ? 'in' : ''}`} role="status">
+            <p className="bar">much better.</p>
+            <p className="label kicker">the fringe · trimmed to the brows</p>
+            <p className="display feature">free trims{' '}<br />between cuts</p>
             <div className="row">
               <Link className="pill hot" href="/book/?look=fringe">book a fringe trim</Link>
               <button className="pill chrome" onClick={reset}>grow it back</button>
@@ -195,11 +215,14 @@ export default function Cover() {
           </div>
         )}
 
-        <Twinkle style={{ left: '12%', top: '62%' }} />
-        <Twinkle style={{ left: '84%', top: '58%', animationDelay: '.7s' }} />
-        <Twinkle style={{ left: '34%', top: '80%', animationDelay: '1.3s', width: 18, height: 18 }} />
+        <a className="burst" href="#lookbook"><span>10 new<br />cuts!</span></a>
+        <a className="label more" href="#lookbook">+ the halo, the curtain<br />&amp; 7 more inside →</a>
 
-        <a className="pill chrome open-book" href="#lookbook">open the lookbook ↓</a>
+        <div className="cta-row">
+          <Link className="pill hot big" href="/book/">book a chair ✦</Link>
+          <span className="label addr">hoża 51 · warszawa</span>
+        </div>
+        <div className="barcode" aria-hidden><span className="bc">*AW26*</span><span>aw26 · 49 zł</span></div>
       </div>
     </section>
   );

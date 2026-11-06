@@ -4,6 +4,9 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { ADDRESS, HOURS, PHONE, TEL, img } from '@/lib/data';
 
+/** a white four-point sparkle, the same one as on the cover */
+export const STAR_URI = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="#fff" d="M10 0C10.8 7 13 9.2 20 10C13 10.8 10.8 13 10 20C9.2 13 7 10.8 0 10C7 9.2 9.2 7 10 0Z"/></svg>')}`;
+
 const NAV = [['/#lookbook', 'lookbook'], ['/prices/', 'prices'], ['/prices/#team', 'the team'], ['/book/', 'book']] as const;
 
 export function Header() {
@@ -32,7 +35,17 @@ export function Header() {
 
 export function FlipPhone() {
   const [mobile, setMobile] = useState(false);
+  const [away, setAway] = useState(false);
+  const path = usePathname();
   useEffect(() => { setMobile(window.matchMedia('(pointer: coarse)').matches); }, []);
+  // the cover already has its own button + barcode in that corner
+  useEffect(() => {
+    const c = document.querySelector('.cover');
+    if (!c) { setAway(false); return; }
+    const io = new IntersectionObserver(([e]) => setAway(e.intersectionRatio > .35), { threshold: [0, .35, 1] });
+    io.observe(c);
+    return () => io.disconnect();
+  }, [path]);
   const inner = (
     <>
       <span className="glow" aria-hidden />
@@ -41,8 +54,8 @@ export function FlipPhone() {
     </>
   );
   return mobile
-    ? <a href={TEL} className="flip" aria-label={`call the salon, ${PHONE}`}>{inner}</a>
-    : <Link href="/book/#call" className="flip" aria-label={`call the salon, ${PHONE}`}>{inner}</Link>;
+    ? <a href={TEL} className={`flip ${away ? 'away' : ''}`} aria-label={`call the salon, ${PHONE}`}>{inner}</a>
+    : <Link href="/book/#call" className={`flip ${away ? 'away' : ''}`} aria-label={`call the salon, ${PHONE}`}>{inner}</Link>;
 }
 
 export function Loader() {
@@ -70,7 +83,7 @@ export function SparkleTrail() {
   const last = useRef(0);
   useEffect(() => {
     if (!window.matchMedia('(pointer: fine)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const src = img('sparkle');
+    const src = STAR_URI;
     const move = (e: PointerEvent) => {
       const now = performance.now();
       if (now - last.current < 70) return;
@@ -107,5 +120,9 @@ export function Footer() {
 }
 
 export function Twinkle({ style }: { style?: React.CSSProperties }) {
-  return <img src={img('sparkle')} alt="" className="twinkle" style={style} />;
+  return (
+    <svg className="twinkle" viewBox="0 0 20 20" style={style} aria-hidden>
+      <path d="M10 0C10.8 7 13 9.2 20 10C13 10.8 10.8 13 10 20C9.2 13 7 10.8 0 10C7 9.2 9.2 7 10 0Z" />
+    </svg>
+  );
 }

@@ -87,6 +87,7 @@ export default function Lookbook() {
               <article key={l.slug} className={`spread ${k % 2 ? 'mirror' : ''}`} aria-roledescription="slide" aria-label={`${k + 1} of ${N}: ${l.name}`}>
                 <div className="sp-photo">
                   <img className="main" src={img(l.slug)} alt={`${l.name}: ${l.line}`} loading={k < 2 ? 'eager' : 'lazy'} />
+                  <span className="star-burst sp-burst" aria-hidden><span><small>from</small>{l.from} zł</span></span>
                 </div>
                 <div className="sp-page">
                   <p className="label folio">lookbook aw26 · p.{pad(4 + k * 2)}</p>
@@ -96,7 +97,7 @@ export default function Lookbook() {
                   </figure>
                   <h2 className={`display sp-name ${l.name.length > 10 ? 'long' : ''}`}><Link href={`/looks/${l.slug}/`}>{l.name}</Link></h2>
                   <p className="sp-line">{l.line}</p>
-                  <p className="label sp-meta"><span>time {l.time}</span><span>from {l.from} zł</span><span>{l.every}</span></p>
+                  <p className="label sp-meta"><span>time {l.time}</span><span className="sr">from {l.from} zł</span><span>{l.every}</span></p>
                   <div className="sp-cta">
                     <Link className="pill hot" href={`/book/?look=${l.slug}`}>book {l.name}</Link>
                     <Link className="pill chrome" href={`/looks/${l.slug}/`}>front, detail, back →</Link>

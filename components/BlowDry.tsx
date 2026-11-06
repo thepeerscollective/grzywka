@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { img, media } from '@/lib/data';
-import { Twinkle } from './chrome';
+import { STAR_URI, Twinkle } from './chrome';
 
 const LOOP_FROM = 2.1;
 
@@ -47,7 +47,7 @@ export default function BlowDry() {
     if (!s || !v || s.querySelectorAll('.bd-particle').length > 40) return;
     const sr = s.getBoundingClientRect(), vr = v.getBoundingClientRect();
     const p = document.createElement('img');
-    p.src = img('sparkle'); p.alt = ''; p.className = 'bd-particle';
+    p.src = STAR_URI; p.alt = ''; p.className = 'bd-particle';
     const x0 = vr.left - sr.left + vr.width * (.25 + Math.random() * .5);
     const y0 = vr.top - sr.top + vr.height * (.15 + Math.random() * .35);
     p.style.left = x0 + 'px'; p.style.top = y0 + 'px';
