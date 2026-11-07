@@ -11,7 +11,7 @@ export default function Legal() {
       <h2 className="label pink">privacy</h2>
       <p>the booking form doesn’t send anything anywhere. we keep one tiny flag in your browser so the loading screen only shows once per visit. no tracking, no cookies.</p>
       <h2 id="accessibility" className="label pink">accessibility</h2>
-      <p>the fun bits all have a plain way in. cut the fringe with the “cut it for me” button, blow-dry by holding space on the hold button, flip the lookbook with the arrow buttons, or open any look from the all looks strip. with reduced motion turned on, the loading screen, sparkles and falling hair are switched off. if something doesn’t work for you, tell us.</p>
+      <p>the fun bits all have a plain way in. cut the fringe with the “cut it for me” button, blow-dry by holding space on the hold button, flip the lookbook with the arrow buttons, or open any look on its own page. with reduced motion turned on, the loading screen, sparkles and falling hair are switched off. if something doesn’t work for you, tell us.</p>
     </section>
   );
 }

@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Cover from '@/components/Cover';
 import Lookbook from '@/components/Lookbook';
 import BlowDry from '@/components/BlowDry';
-import AllLooks from '@/components/AllLooks';
 import { Twinkle } from '@/components/chrome';
 import { ADDRESS, HOURS, PHONE, TEAM, TEL, img } from '@/lib/data';
 import './home.css';
@@ -13,7 +12,6 @@ export default function Home() {
       <Cover />
       <Lookbook />
       <BlowDry />
-      <AllLooks />
       <section className="team-strip" aria-labelledby="team-t">
         <h2 id="team-t" className="display">the girls with the scissors</h2>
         <div className="team-grid">
